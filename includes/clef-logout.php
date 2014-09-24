@@ -29,8 +29,7 @@ function process_clef_logout_callback() {
             );
         }
 
-        echo(json_encode($return));
-        exit();
+        ClefUtils::return_json($return);
     }
 }
 
@@ -39,10 +38,34 @@ function check_user_logout() {
         $user = ClefUser::find(array('id' => $_SESSION['uid']));
         if ($user->is_logged_out()) {
             $user->logout();
-            ClefUtils::redirect('clientarea.php');
+            $logged_out = true;
+        } else {
+            $logged_out = false;
+        }
+
+        if (ClefUtils::isset_GET('ajax_logout')) {
+            return ClefUtils::return_json(array(
+                'success' => true,
+                'loggedOut' => $logged_out
+            ));
+        } else {
+            if ($logged_out) return ClefUtils::redirect('clientarea.php');
         }
     }
 }
 
+
+function render_logout_check($data) {
+    if (isset($data['loggedin']) && $data['loggedin']) {
+        return ClefUtils::render_template('logout.tpl', array(
+            'script_url' => ClefUtils::script_url('clef', $data['systemurl'])
+        ));
+    }
+}
+
+
+
 add_hook("ClientAreaPage", 1, 'process_clef_logout_callback');
 add_hook("ClientAreaPage", 1, 'check_user_logout');
+
+add_hook("ClientAreaFooterOutput", 1, 'render_logout_check');

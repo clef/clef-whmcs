@@ -188,5 +188,10 @@ class ClefUtils {
         if (isset(self::$messages[$name])) return self::$messages[$name];
         return null;
     }
+
+    public static function return_json($msg) {
+        echo(json_encode($msg));
+        die();
+    }
 }
 ?>
