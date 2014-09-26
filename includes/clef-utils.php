@@ -84,41 +84,6 @@ class ClefUtils {
         return 'text/html';
     }
 
-    // public static function user_has_clef($user=false) {
-    //     # if no user is provided, defaults to current user
-    //     if (!$user) $user = wp_get_current_user();
-    //     return !!get_user_meta($user->ID, "clef_id", true);
-    // }
-
-    // public static function associate_clef_id($clef_id, $user_id=false) {
-    //     if (!$user_id) {
-    //         $user_id = wp_get_current_user()->ID;
-    //     }
-
-    //     $user = get_users(array(
-    //         'meta_key' => 'clef_id',
-    //         'meta_value' => $clef_id,
-    //         'blog_id' => false
-    //     ));
-
-    //     if (!empty($user))  {
-    //         return new WP_Error(
-    //             'clef_id_already_associated',
-    //             __("The Clef account you're trying to connect is already associated to a different WordPress account", "clef")
-    //         );
-    //     }
-
-    //     update_user_meta($user_id, 'clef_id', $clef_id);
-    // }
-
-    // public static function dissociate_clef_id($user_id=false) {
-    //     if (!$user_id) {
-    //         $user_id = wp_get_current_user()->ID;
-    //     }
-
-    //     delete_user_meta($user_id, "clef_id");
-    // }
-
     public static function exchange_oauth_code_for_info($code, $settings=null, $app_id=false, $app_secret=false) {
 
         if (!$app_id) $app_id = ClefSettings::get( 'application_id' );
@@ -130,32 +95,18 @@ class ClefUtils {
             'app_secret' => $app_secret,
         );
 
-        $response = curlCall(
-            CLEF_API_BASE . 'authorize',
-            $args,
-            array( 'method'=> 'POST', 'timeout' => 20 )
-        );
-
-        // if ( is_wp_error($response)  ) {
-        //     throw new LoginException(__( "Something went wrong: ", 'clef' ) . $response->get_error_message());
-        // }
-
+        $response = curlCall(CLEF_API_BASE . 'authorize', $args, array( 'method'=> 'POST', 'timeout' => 20 ));
         $body = json_decode( $response );
 
+        if (!$body) throw new LoginException("Somethign went wrong: " . $response);
         if ( !isset($body->success) || $body->success != 1 ) {
             throw new LoginException('Error retrieving Clef access token: ' . $body->error);
         }
 
-        $access_token = $body->access_token;
-
-        // Get info
-        $response = curlCall( CLEF_API_BASE . "info?access_token={$access_token}" );
-        // if ( is_wp_error($response)  ) {
-        //     throw new LoginException(__( "Something went wrong: ", 'clef' ) . $response->get_error_message());
-        // }
-
+        $response = curlCall( CLEF_API_BASE . "info?access_token={$body->access_token}" );
         $body = json_decode( $response );
 
+        if (!$body) throw new LoginException("Somethign went wrong: " . $response);
         if ( !isset($body->success) || $body->success != 1 ) {
             throw new LoginException('Error retrieving Clef user data: ' . $body->error);
         }
@@ -168,10 +119,12 @@ class ClefUtils {
     }
 
     public static function script_url($name, $base) {
+        if (!$base) $base = "";
         return $base . "modules/addons/clef/static/dist/js/$name.js";
     }
 
     public static function style_url($name, $base) {
+        if (!$base) $base = "";
         return $base . "modules/addons/clef/static/dist/css/$name.css";
     }
 

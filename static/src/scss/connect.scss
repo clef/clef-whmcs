@@ -1,0 +1,19 @@
+.clef-connect {
+    min-height: 500px;
+}
+
+.clef-connect .header-container {
+    margin-bottom: 20px;
+}
+
+.clef-connect .status.is-connected {
+    color: green;
+}
+.clef-connect .status.is-disconnected {
+    color: red;
+}
+
+.clef-connect .btn,
+.clef-connect .clef-button-container {
+    margin-top: 10px;
+}

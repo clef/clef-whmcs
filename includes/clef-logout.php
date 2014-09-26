@@ -23,9 +23,15 @@ function process_clef_logout_callback() {
                 "success" => true
             );
         } else {
+            if ($body) {
+                $error = $body->error;
+            } else {
+                $error = $response;
+            }
+
             $return = array(
                 "success" => false,
-                "error" => $body->error
+                "error" => $response
             );
         }
 
@@ -68,4 +74,4 @@ function render_logout_check($data) {
 add_hook("ClientAreaPage", 1, 'process_clef_logout_callback');
 add_hook("ClientAreaPage", 1, 'check_user_logout');
 
-add_hook("ClientAreaFooterOutput", 1, 'render_logout_check');
+add_hook("ClientAreaFooterOutput", 2, 'render_logout_check');

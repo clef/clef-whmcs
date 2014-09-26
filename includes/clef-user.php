@@ -77,6 +77,10 @@ class ClefUser {
         unset($_SESSION['logged_in_at']);
     }
 
+    public function has_clef() {
+        return !!$this->clef_id;
+    }
+
 
     public function is_logged_out() {
         if (isset($_SESSION['logged_in_at'])) {
@@ -84,10 +88,18 @@ class ClefUser {
         }
     }
 
-    public function associate_clef_id($clef_id) {
-        return $query = update_query(
+    public function connect_clef_account($clef_id) {
+        return update_query(
             "tblclients",
             array('clef_id' => $clef_id),
+            array('id' => $this->id)
+        );
+    }
+
+    public function disconnect_clef_account() {
+        return update_query(
+            "tblclients",
+            array('clef_id' => null),
             array('id' => $this->id)
         );
     }

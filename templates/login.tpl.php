@@ -19,5 +19,4 @@
 
 <link rel="stylesheet" href="<?php echo $style_url ?>">
 <script type="text/javascript" src="<? echo CLEF_JS_URL ?>"></script>
-<script type="text/javascript" src="<?php echo $script_url ?>"></script>
 <script>new ClefLogin();</script>

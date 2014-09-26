@@ -15,14 +15,7 @@
 
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
 
-class LoginException extends Exception {}
-
-require_once('settings.php');
-require_once('includes/clef-settings.php');
-require_once('includes/clef-utils.php');
-require_once('includes/clef-user.php');
-
-
+require_once('clef-includes.php');
 
 require_once('includes/clef-login.php');
 require_once('includes/clef-logout.php');

@@ -14,6 +14,8 @@
 
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
 
+require_once('clef-includes.php');
+
 function clef_config() {
     return array(
         "name" => "Clef",
@@ -79,36 +81,5 @@ function clef_deactivate() {
 function clef_upgrade($vars) {
 
     $version = $vars['version'];
-
-}
-
-function clef_output() {
-    echo 'HEYYYOOJJ$';
-}
-
-
-function clef_clientarea($vars) {
-    error_log('hey');
-    $modulelink = $vars['modulelink'];
-    $version = $vars['version'];
-    $option1 = $vars['option1'];
-    $option2 = $vars['option2'];
-    $option3 = $vars['option3'];
-    $option4 = $vars['option4'];
-    $option5 = $vars['option5'];
-    $option6 = $vars['option6'];
-    $LANG = $vars['_lang'];
-
-    return array(
-        'pagetitle' => 'Clef is the best',
-        'breadcrumb' => array('index.php?m=clef'=>'Clef Addon'),
-        'templatefile' => 'clienthome',
-        'requirelogin' => true, # or false
-        'vars' => array(
-            'testvar' => 'demo',
-            'anothervar' => 'value',
-            'sample' => 'test',
-        ),
-    );
 
 }

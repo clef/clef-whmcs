@@ -27,6 +27,24 @@ class Logout
   refresh: ->
     window.location = ''
 
+class Clef
+  constructor: (@options) ->
+    $(document).ready(@render.bind(this))
+  render: ->
+    @addNavigationLinks()
+    console.log 'hey'
+  addNavigationLinks: ->
+    $userDropdown = $('#Menu-Hello_User')
+    if $userDropdown.length
+      $password = $userDropdown.next().find('#Menu-Hello_User-Change_Password')
+      $password
+        .clone()
+        .attr('id', null)
+        .attr('href', "#{@options.baseURL}/index.php?m=clef")
+        .text('Manage Passwordless Login')
+        .wrap('<li></li>')
+        .insertAfter($password)
 
+global.Clef = Clef
 global.ClefLogin = Login
 global.ClefLogout = Logout
