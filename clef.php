@@ -4,12 +4,12 @@
  *
  * This addon module allows clients to login to their Client Area account using the Clef service.
  *
- * @package    Clef Login
- * @author     9th Node Networks <webmaster@9thnode.com>
- * @copyright  Copyright (c) 9th Node Networks 2014-2015
- * @license    http://www.9thnode.com 9th Node Networks Eula
- * @version    1.0
- * @link       http://www.9thnode.com
+ * @package    Clef
+ * @author     Clef, Inc. <support@getclef.com>
+ * @copyright  Copyright (c) Clef 2014-2015
+ * @license    MIT
+ * @version    0.0.1
+ * @link       https://getclef.com
  */
 
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
@@ -20,8 +20,8 @@ function clef_config() {
     return array(
         "name" => "Clef",
         "description" => "This addon module allows clients to login to the Client Area account using Clef.",
-        "version" => "1.0",
-        "author" => "9th Node Networks",
+        "version" => "0.0.1",
+        "author" => "Clef",
         "language" => "english",
         "fields" => array(
             "application_id" => array (

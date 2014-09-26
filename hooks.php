@@ -2,14 +2,14 @@
 /**
  * Clef
  *
- * This is the login hook for using the Clef API allowing clients to login to their Client Area account using the Clef service.
+ * This addon module allows clients to login to their Client Area account using the Clef service.
  *
  * @package    Clef
- * @author     9th Node Networks <webmaster@9thnode.com>
- * @copyright  Copyright (c) 9th Node Networks 2014-2015
- * @license    http://www.9thnode.com 9th Node Networks Eula
+ * @author     Clef, Inc. <support@getclef.com>
+ * @copyright  Copyright (c) Clef 2014-2015
+ * @license    MIT
  * @version    1.0
- * @link       http://www.9thnode.com
+ * @link       https://getclef.com
  */
 
 
