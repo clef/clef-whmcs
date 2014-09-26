@@ -8,7 +8,7 @@ Clef is easy, secure, passwordless two-factor authentication for your WHMCS clie
 
 ## Installation
 
-To install the latest stable build of Clef for WHMCS, download the [latest release](https://github.com/clef/whmcs/releases) and copy the directory into `modules/addons/`.
+To install the latest stable build of Clef for WHMCS, download the [latest release](https://github.com/clef/whmcs/releases) and copy the directory into `modules/addons/`. Once you've added the clef addon, log into the WHMCS administrator portal and go to Setup > Addon Modules. There, Activate Clef and configure it with a new Clef application ID and Secret (you can get these at [getclef.com](https://getclef.com).
 
 To install, contribute to, and test the developer build, you should clone this repository and work on master.
 
