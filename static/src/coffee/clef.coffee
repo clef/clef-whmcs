@@ -6,7 +6,7 @@ class Login
       @render()
   render: ->
     $('.clef-login')
-      .prependTo($('.logincontainer'))
+      .prependTo($('form[action*="dologin.php"]'))
       .css
         display: 'block'
     @initializeButtons()
@@ -32,18 +32,17 @@ class Clef
     $(document).ready(@render.bind(this))
   render: ->
     @addNavigationLinks()
-    console.log 'hey'
   addNavigationLinks: ->
-    $userDropdown = $('#Menu-Hello_User')
-    if $userDropdown.length
-      $password = $userDropdown.next().find('#Menu-Hello_User-Change_Password')
-      $password
+    $changePasswordLink = $('li a[href*="clientarea.php?action=changepw"]')
+    if $changePasswordLink.length
+      $clefLink = $changePasswordLink
         .clone()
         .attr('id', null)
         .attr('href', "#{@options.baseURL}/index.php?m=clef")
         .text('Manage Passwordless Login')
-        .wrap('<li></li>')
-        .insertAfter($password)
+        .wrap('<li>')
+        .parent()
+        .insertAfter($changePasswordLink.parent())
 
 global.Clef = Clef
 global.ClefLogin = Login

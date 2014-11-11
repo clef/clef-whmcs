@@ -63,7 +63,8 @@ function render_clef_login($data) {
             'app_id' => ClefSettings::get('application_id'),
             'redirect_url' => $redirect_url,
             'error' => array("value" => $error, "sanitize" => false),
-            'clef_id' => ClefUtils::get_message('clef_id')
+            'clef_id' => ClefUtils::get_message('clef_id'),
+            'template' => $data['template']
         ));
     }
 }

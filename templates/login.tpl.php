@@ -1,4 +1,4 @@
-<div class="clef-login" style="display:none;">
+<div class="clef-login <?php echo 'clef-login-' . $template ?>" style="display:none;">
 
     <?php if (isset($error['value'])) { ?>
     <div class="alert alert-error">

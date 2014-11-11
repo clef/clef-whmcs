@@ -25,7 +25,7 @@ gulp.task 'browserify', ->
   gulp.src './static/src/coffee/clef.coffee', read: false
     .pipe browserify
       insertGlobals: false
-      debug: true
+      debug: !process.NODE_ENV == "production"
       transform: ['coffeeify']
       extensions: ['.coffee']
     .on 'error', handleError
