@@ -8,7 +8,7 @@
  * @author     Clef, Inc. <support@getclef.com>
  * @copyright  Copyright (c) Clef 2014-2015
  * @license    MIT
- * @version    0.0.1
+ * @version    0.0.2
  * @link       https://getclef.com
  */
 
@@ -20,7 +20,7 @@ function clef_config() {
     return array(
         "name" => "Clef",
         "description" => "This addon module allows clients to login to the Client Area account using Clef.",
-        "version" => "0.0.1",
+        "version" => "0.0.2",
         "author" => "Clef",
         "language" => "english",
         "fields" => array(

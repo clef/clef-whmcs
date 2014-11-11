@@ -1,6 +1,6 @@
 {
   "name": "clef-whmcs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {},
   "devDependencies": {
     "gulp-changed": "~0.4.1",
