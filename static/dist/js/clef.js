@@ -79,10 +79,16 @@ Clef = (function() {
   };
 
   Clef.prototype.addNavigationLinks = function() {
-    var $changePasswordLink, $clefLink;
+    var $changePasswordLink;
     $changePasswordLink = $('li a[href*="clientarea.php?action=changepw"]');
     if ($changePasswordLink.length) {
-      return $clefLink = $changePasswordLink.clone().attr('id', null).attr('href', "" + this.options.baseURL + "/index.php?m=clef").text('Manage Passwordless Login').wrap('<li>').parent().insertAfter($changePasswordLink.parent());
+      return $.each($changePasswordLink, (function(_this) {
+        return function(i, el) {
+          var $clefLink, $el;
+          $el = $(el);
+          return $clefLink = $el.clone().attr('id', null).attr('href', "" + _this.options.baseURL + "/index.php?m=clef").text('Manage Passwordless Login').wrap('<li>').parent().insertAfter($el.parent());
+        };
+      })(this));
     }
   };
 

@@ -35,14 +35,16 @@ class Clef
   addNavigationLinks: ->
     $changePasswordLink = $('li a[href*="clientarea.php?action=changepw"]')
     if $changePasswordLink.length
-      $clefLink = $changePasswordLink
-        .clone()
-        .attr('id', null)
-        .attr('href', "#{@options.baseURL}/index.php?m=clef")
-        .text('Manage Passwordless Login')
-        .wrap('<li>')
-        .parent()
-        .insertAfter($changePasswordLink.parent())
+      $.each $changePasswordLink, (i, el) =>
+        $el = $(el)
+        $clefLink = $el
+          .clone()
+          .attr('id', null)
+          .attr('href', "#{@options.baseURL}/index.php?m=clef")
+          .text('Manage Passwordless Login')
+          .wrap('<li>')
+          .parent()
+          .insertAfter($el.parent())
 
 global.Clef = Clef
 global.ClefLogin = Login
