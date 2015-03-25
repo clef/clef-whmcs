@@ -14,7 +14,9 @@ To install the latest stable build of Clef for WHMCS, follow these steps:
 2. Unzip the zipped source code and rename the unzipped directory from `whmcs-X.X.X` to `clef`
 3. Copy the `clef`  directory into `modules/addons/`
 4. Log into the WHMCS administrator portal and go to Setup > Addon Modules. 
-5. Activate Clef and configure it with a new Clef application ID and Secret (you can get these at [getclef.com](https://getclef.com), set the Application Domain and Logout Hook URL to the base URL of your WHMCS install).
+5. Activate Clef and configure it with a new Clef application ID and Secret. If the base URL of your install is `http://example.com`, you should set:
+  * Application Domain: `http://example.com`
+  * Logout Hook URL: `http://example.com/?m=clef`
 
 To install, contribute to, and test the developer build, you should clone this repository and work on master.
 
