@@ -152,14 +152,17 @@ class ClefUtils {
         if (!$override && isset($_COOKIE['_clef_state']) && $_COOKIE['_clef_state']) return;
 
         $state = md5(uniqid(rand(), true));
-        setcookie('_clef_state', $state, (time() + 60 * 60 * 24), '/', '', isset($_SERVER['HTTPS']), true);
+        @setcookie('_clef_state', $state, (time() + 60 * 60 * 24), '/', '', isset($_SERVER['HTTPS']), true);
 
         return $state;
     }
 
     public static function get_state() {
-        if (!isset($$_COOKIE['_clef_state']) || !$_COOKIE['_clef_state']) ClefUtils::initialize_state();
-        return $_COOKIE['_clef_state'];
+        if (!isset($$_COOKIE['_clef_state']) || !$_COOKIE['_clef_state']) {
+            return ClefUtils::initialize_state();
+        } else {
+            return $_COOKIE['_clef_state'];
+        }
     }
 
     public static function verify_state() {
