@@ -23,16 +23,12 @@ function clef_clientarea($vars) {
     }
 
     if (ClefUtils::isset_GET('action') == "connect") {
-        if (ClefCSRF::verify('connect', ClefUtils::isset_GET('state'))) {
-            try {
-                $info = ClefUtils::exchange_oauth_code_for_info(ClefUtils::isset_GET('code'));
-                $user->connect_clef_account($info->id);
-                ClefUtils::redirect('index.php?m=clef');
-            } catch (Exception $e) {
-                $error = $e->message;
-            }
-        } else {
-            $error = "Invalid CSRF token.";
+        try {
+            $info = ClefUtils::exchange_oauth_code_for_info(ClefUtils::isset_GET('code'));
+            $user->connect_clef_account($info->id);
+            ClefUtils::redirect('index.php?m=clef');
+        } catch (Exception $e) {
+            $error = $e->getMessage();
         }
     }
 
@@ -40,7 +36,9 @@ function clef_clientarea($vars) {
         'has_clef_account' => $user->has_clef(),
         'style_path' => ClefUtils::style_url('connect'),
         'csrf_token' => ClefCSRF::generate('connect'),
-        'app_id' => ClefSettings::get('application_id')
+        'state' => ClefUtils::get_state(),
+        'app_id' => ClefSettings::get('application_id'),
+        'error' => $error
     );
 
     return $properties;

@@ -14,6 +14,7 @@
         class="clef-button-to-render"
         data-app-id="<?php echo $app_id ?>"
         data-redirect-url="<?php echo $redirect_url ?>"
+        data-state="<?php echo ClefUtils::get_state(); ?>"
     ></div>
 </div>
 

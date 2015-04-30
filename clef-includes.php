@@ -1,6 +1,7 @@
 <?php
 
 class LoginException extends Exception {}
+class ClefStateException extends Exception {}
 
 require_once('settings.php');
 require_once('includes/clef-csrf.php');
