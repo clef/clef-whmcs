@@ -11,7 +11,6 @@
  * @version    0.0.2
  * @link       https://getclef.com
  */
-
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
 
 require_once('clef-includes.php');

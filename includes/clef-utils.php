@@ -85,6 +85,7 @@ class ClefUtils {
     }
 
     public static function exchange_oauth_code_for_info($code, $settings=null, $app_id=false, $app_secret=false) {
+        ClefUtils::verify_state();
 
         if (!$app_id) $app_id = ClefSettings::get( 'application_id' );
         if (!$app_secret) $app_secret = ClefSettings::get( 'application_secret' );
@@ -145,6 +146,32 @@ class ClefUtils {
     public static function return_json($msg) {
         echo(json_encode($msg));
         die();
+    }
+
+    public static function initialize_state($override = false) {
+        if (!$override && isset($_COOKIE['_clef_state']) && $_COOKIE['_clef_state']) return;
+
+        $state = md5(uniqid(rand(), true));
+        setcookie('_clef_state', $state, (time() + 60 * 60 * 24), '/', '', isset($_SERVER['HTTPS']), true);
+
+        return $state;
+    }
+
+    public static function get_state() {
+        if (!isset($$_COOKIE['_clef_state']) || !$_COOKIE['_clef_state']) ClefUtils::initialize_state();
+        return $_COOKIE['_clef_state'];
+    }
+
+    public static function verify_state() {
+        $request_state = ClefUtils::isset_GET('state') ? ClefUtils::isset_GET('state') : ClefUtils::isset_POST('state');
+        $correct_state = ClefUtils::get_state();
+
+        if ($request_state && $correct_state && $correct_state == $request_state) {
+            ClefUtils::initialize_state(true);
+            return true;
+        } else {
+            throw new ClefStateException('The state parameter is not verified. This may be due to this page being cached by another add-on. Please refresh your page and try again');
+        }
     }
 }
 ?>

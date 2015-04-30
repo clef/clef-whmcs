@@ -12,6 +12,11 @@
       <div class="page-header">
         <h3>Your account status</h3>
       </div>
+      {if $error }
+      <div class="alert alert-error">
+          <p>{$error}</p>
+      </div>
+      {/if}
       {if $has_clef_account }
       <p>Your Clef account is currently <b class="status is-connected">connected</b>.</p>
       <form method="POST" action="{$systemurl}index.php?m=clef">
@@ -25,8 +30,9 @@
         <div
             class="clef-button"
             data-app-id="{$app_id}"
-            data-redirect-url="{$systemurl}index.php?m=clef&state={$csrf_token}&action=connect"
+            data-redirect-url="{$systemurl}index.php?m=clef&action=connect"
             data-type="connect"
+            data-state="{$state}"
         ></div>
       </div>
       {/if}
