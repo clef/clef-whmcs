@@ -153,12 +153,13 @@ class ClefUtils {
 
         $state = md5(uniqid(rand(), true));
         @setcookie('_clef_state', $state, (time() + 60 * 60 * 24), '/', '', isset($_SERVER['HTTPS']), true);
+        $_COOKIE['_clef_state'] = $state;
 
         return $state;
     }
 
     public static function get_state() {
-        if (!isset($$_COOKIE['_clef_state']) || !$_COOKIE['_clef_state']) {
+        if (!isset($_COOKIE['_clef_state']) || !$_COOKIE['_clef_state']) {
             return ClefUtils::initialize_state();
         } else {
             return $_COOKIE['_clef_state'];
