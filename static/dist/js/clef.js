@@ -75,7 +75,7 @@ Clef = (function() {
   }
 
   Clef.prototype.render = function() {
-    return this.addNavigationLinks();
+    // return this.addNavigationLinks();
   };
 
   Clef.prototype.addNavigationLinks = function() {
