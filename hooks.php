@@ -19,3 +19,18 @@ require_once('clef-includes.php');
 
 require_once('includes/clef-login.php');
 require_once('includes/clef-logout.php');
+
+use WHMCS\View\Menu\Item as MenuItem;
+ 
+add_hook('ClientAreaSecondaryNavbar', 1, function (MenuItem $secondaryNavbar)
+{
+    if (!is_null($secondaryNavbar->getChild('Account'))) {
+        $secondaryNavbar->getChild('Account')
+            ->addChild('Manage Passwordless Login', array(
+                'label' => 'Manage Passwordless Login',
+                'uri' => 'index.php?m=clef',
+                'icon' => 'fa-thumbs-up',
+                'order' => '44',
+            ));
+    }
+});
